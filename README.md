@@ -1,7 +1,11 @@
-# Stitch — Atelier redesign concept
+# Stitch — fashion redesign concept
 
-Interactive redesign concept for [stitcheg.com](https://stitcheg.com/). Single-file HTML, no build step: open `index.html`.
+Static multi-page redesign concept for [stitcheg.com](https://stitcheg.com/). No build step.
 
-Includes: intro loader, mega-menu, live search (`/`), product quick view, wishlist, bag drawer with free-shipping bar, scroll-driven "Find your sock", responsive layout.
+- `index.html` — homepage
+- `collection.html?g=men|women|kids|babies|trendy|new|sale` — collection with filters, sort and column toggle
+- `product.html?h=<handle>` — product page with colourways, sizes, size guide and related items
+- `data.js` — Stitch's real catalogue (261 products)
+- `explorations/` — earlier design directions
 
-`explorations/` holds the earlier directions. Product photos load from Stitch's own CDN, so an internet connection is needed. Checkout and newsletter are non-functional placeholders.
+Product photos load from Stitch's CDN. Checkout and newsletter are non-functional placeholders.

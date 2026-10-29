@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Collection — Stitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+main{padding-top:calc(34px + 72px)}
+.crumb{padding:30px var(--pad) 0;color:var(--mut)}.crumb a:hover{color:var(--ink)}.crumb span{margin:0 8px}
+.ch{padding:18px var(--pad) 0;display:grid;grid-template-columns:1.4fr 1fr;gap:6vw;align-items:end}
+@media(max-width:800px){.ch{grid-template-columns:1fr;gap:16px}}
+.ch h1{font-weight:200;font-size:clamp(52px,9vw,150px);line-height:.88;letter-spacing:-.06em}
+.ch p{color:#5b5a55;line-height:1.7;max-width:42ch;font-size:16px}
+.cuts{display:flex;gap:26px;padding:34px var(--pad) 0;overflow-x:auto;scrollbar-width:none}.cuts::-webkit-scrollbar{display:none}
+.cuts button{white-space:nowrap;color:var(--mut);padding-bottom:5px;border-bottom:1px solid transparent;transition:.3s}.cuts button:hover,.cuts button.on{color:var(--ink);border-color:var(--ink)}
+.tb{position:sticky;top:64px;z-index:40;background:#fff;border-bottom:1px solid var(--line);margin-top:26px;display:flex;justify-content:space-between;align-items:center;padding:14px var(--pad);gap:16px}
+.tb .l,.tb .r{display:flex;gap:26px;align-items:center}
+.fbtn{display:flex;gap:10px;align-items:center}.fbtn i{font-style:normal;background:var(--ink);color:#fff;border-radius:50%;width:18px;height:18px;display:grid;place-items:center;font-size:10px}
+.sel{position:relative}.sel select{appearance:none;background:none;border:0;font:inherit;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:400;padding-right:18px;cursor:pointer;color:var(--ink);outline:0}.sel:after{content:"+";position:absolute;right:0;top:50%;transform:translateY(-52%);pointer-events:none;font-size:13px}
+.vw{display:flex;gap:10px}.vw button{width:22px;height:22px;display:grid;place-items:center;opacity:.35;transition:.3s}.vw button.on,.vw button:hover{opacity:1}
+.vw svg{width:18px;height:18px;fill:currentColor}
+@media(max-width:700px){.vw{display:none}.tb .r{gap:18px}.tb .l{gap:14px}#count{white-space:nowrap;font-size:10.5px}}
+.gr{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);gap:48px 10px;padding:30px var(--pad) 0}
+@media(max-width:900px){.gr{--cols:2!important;gap:34px 8px}}
+.eb{grid-column:1/-1;position:relative;height:min(70vh,620px);overflow:hidden;color:#fff;display:block;margin:6px 0}
+.eb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.8s var(--ease)}.eb:hover img{transform:scale(1.03)}
+.eb:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.5),transparent 60%)}
+.eb div{position:absolute;left:var(--pad);bottom:6vh;z-index:2;max-width:480px}
+.eb h3{font-weight:200;font-size:clamp(34px,4.6vw,76px);letter-spacing:-.05em;line-height:1;margin-bottom:20px}
+.more{text-align:center;padding:9vh 0 0}.more p{color:var(--mut);margin-bottom:20px;font-size:13px}
+/* filter panel */
+.fp{position:fixed;left:0;top:0;bottom:0;width:min(400px,100%);background:#fff;z-index:100;transform:translateX(-100%);transition:transform .65s var(--ease);display:flex;flex-direction:column;padding:26px}
+.fp.on{transform:none}
+.fb{flex:1;overflow:auto;padding:8px 0}
+.fg2{padding:22px 0;border-bottom:1px solid var(--line)}
+.fg2 h5{font-weight:400;margin-bottom:16px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:10px 16px;border:1px solid var(--line);font-size:13.5px;transition:.25s}.chip small{color:var(--mut);margin-left:6px;font-size:11px}
+.chip:hover{border-color:var(--ink)}.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}.chip.on small{color:#bbb}
+.sw{display:flex;justify-content:space-between;align-items:center;font-size:14.5px;cursor:pointer}.sw i{width:38px;height:20px;border:1px solid var(--ink);border-radius:20px;position:relative;transition:.3s}.sw i:after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--ink);transition:.3s var(--ease)}.sw.on i{background:var(--ink)}.sw.on i:after{left:20px;background:#fff}
+.ff{display:flex;gap:10px;padding-top:18px}.ff .pill{flex:1;padding:15px}
+</style>
+</head>
+<body>
+<main>
+  <div class="crumb up"><a href="index.html">Home</a><span>/</span><span style="margin:0;color:var(--ink)" id="bc">Men</span></div>
+  <div class="ch"><h1 id="ttl">Men</h1><p id="desc"></p></div>
+  <div class="cuts up" id="cuts"></div>
+  <div class="tb"><div class="l"><button class="fbtn up" id="fo">Filter <i id="fcnt" hidden>0</i></button><span class="mut up" id="count"></span></div>
+    <div class="r"><label class="sel up"><select id="sort" aria-label="Sort"><option value="feat">Sort: Featured</option><option value="new">Newest</option><option value="lo">Price, low to high</option><option value="hi">Price, high to low</option></select></label>
+    <div class="vw"><button data-c="2" aria-label="Two columns"><svg viewBox="0 0 18 18"><rect x="1" y="1" width="7" height="16"/><rect x="10" y="1" width="7" height="16"/></svg></button><button data-c="4" class="on" aria-label="Four columns"><svg viewBox="0 0 18 18"><rect x="0" y="1" width="3.5" height="16"/><rect x="4.8" y="1" width="3.5" height="16"/><rect x="9.6" y="1" width="3.5" height="16"/><rect x="14.4" y="1" width="3.5" height="16"/></svg></button></div></div></div>
+  <div class="gr" id="gr"></div>
+  <div class="more" id="more"></div>
+</main>
+
+<aside class="fp" id="fp"><div class="dh up"><span>Filter</span><button class="up" id="fx">Close</button></div><div class="fb" id="fb"></div><div class="ff"><button class="pill up" id="fclr">Clear all</button><button class="pill fill up" id="fdone">Show <span id="fres"></span></button></div></aside>
+
+<script src="data.js"></script>
+<script src="assets/site.js"></script>
+<script>
+const {$,$$,P,GN,L,card,mount,q,sizeLabel,sizesOf}=ST;
+mount({solid:true});
+const U=new URLSearchParams(location.search);
+const g=U.get('g')||'all';
+const META={
+ men:['Men','Everyday socks for men in invisible, low, medium and long cuts. Light weight to full cushioned.'],
+ women:['Women','Soft, breathable socks for women. From invisible and no-show to long-cut classics.'],
+ kids:['Kids','Anti-irritation materials in packs of three and five pairs. Sizes 26 to 37.'],
+ babies:['Babies','The gentlest pair for newborns and little ones. Packs of three pairs.'],
+ trendy:['Trendy','Two stripes, patterns and bold lettering. Half cushioned, long and medium cuts.'],
+ new:['New in','The latest pairs, fresh from the studio.'],
+ sale:['Sale','Selected pairs, reduced.'],
+ all:['All socks','The complete Stitch collection.']};
+const [T,D]=META[g]||META.all;$('#ttl').textContent=T;$('#bc').textContent=T;$('#desc').textContent=D;document.title=T+' — Stitch';
+let base=P.slice();
+if(g==='new')base=P.slice().sort((a,b)=>b.ca-a.ca).slice(0,48);else if(g==='sale')base=P.filter(p=>p.cmp>p.pr);else if(g!=='all')base=P.filter(p=>p.g===g);
+const F={cu:U.get('cu')?U.get('cu').split(','):[],cut:U.get('cut')?U.get('cut').split(','):[],sz:[],pr:[],stock:false};
+let sort=U.get('sort')||'feat',cols=+(U.get('c')||4),shown=24;
+const PR=[['u150','Under 150 EGP',p=>p.pr<150],['m','150 – 200 EGP',p=>p.pr>=150&&p.pr<=200],['o200','Over 200 EGP',p=>p.pr>200]];
+const uniq=(k,src=base)=>[...new Set(src.map(p=>p[k]))];
+function apply(skip){return base.filter(p=>
+ (skip==='cu'||!F.cu.length||F.cu.includes(p.cu))&&(skip==='cut'||!F.cut.length||F.cut.includes(p.cut))&&
+ (skip==='sz'||!F.sz.length||sizesOf(p).some(s=>F.sz.includes(s)))&&
+ (skip==='pr'||!F.pr.length||F.pr.some(k=>PR.find(x=>x[0]===k)[2](p)))&&(!F.stock||p.av))}
+function sorted(a){a=a.slice();if(sort==='new')a.sort((x,y)=>y.ca-x.ca);else if(sort==='lo')a.sort((x,y)=>x.pr-y.pr);else if(sort==='hi')a.sort((x,y)=>y.pr-x.pr);else a.sort((x,y)=>y.av-x.av);return a}
+function sync(){const u=new URLSearchParams();u.set('g',g);if(F.cu.length)u.set('cu',F.cu.join(','));if(F.cut.length)u.set('cut',F.cut.join(','));if(sort!=='feat')u.set('sort',sort);if(cols!==4)u.set('c',cols);history.replaceState(null,'','?'+u)}
+/* cut sub-nav */
+function renderCuts(){const cuts=['Invisible','No Show','Low-Cut','Medium-Cut','Long-Cut'].filter(c=>base.some(p=>p.cut===c));
+ $('#cuts').innerHTML=cuts.length>1?`<button data-c="" class="${!F.cut.length?'on':''}">All</button>`+cuts.map(c=>`<button data-c="${c}" class="${F.cut.length===1&&F.cut[0]===c?'on':''}">${c}</button>`).join(''):''}
+$('#cuts').onclick=e=>{const b=e.target.closest('button');if(!b)return;F.cut=b.dataset.c?[b.dataset.c]:[];shown=24;render()};
+/* grid */
+const EB={men:['women','Shop women'],women:['men','Shop men'],kids:['trendy','Shop trendy'],babies:['kids','Shop kids'],trendy:['women','Shop women'],all:['men','Shop men'],new:['women','Shop women'],sale:['men','Shop men']};
+function render(){
+ const list=sorted(apply());const active=F.cu.length+F.cut.length+F.sz.length+F.pr.length+(F.stock?1:0);
+ $('#count').textContent=list.length+(list.length===1?' product':' products');$('#fcnt').hidden=!active;$('#fcnt').textContent=active;$('#fres').textContent=list.length;
+ const gr=$('#gr');gr.style.setProperty('--cols',cols);
+ let html='';list.slice(0,shown).forEach((p,i)=>{
+  if(i===8&&!active&&list.length>12){const[k,t]=EB[g]||EB.all;html+=`<a class="eb" href="collection.html?g=${k}"><img src="${L(k==='trendy'?'hero':k,1800)}" alt=""><div><h3>${t.replace('Shop ','')}</h3><span class="pill light up">${t}</span></div></a>`}
+  html+=card(p,i<8)});
+ gr.innerHTML=html||'<p class="empty">No pairs match these filters.<br><button class="up ul" id="clr2" style="margin-top:14px">Clear filters</button></p>';
+ const rem=list.length-shown;$('#more').innerHTML=rem>0?`<p class="up">Showing ${shown} of ${list.length}</p><button class="pill up" id="mb">Show more</button>`:'';
+ renderCuts();renderFilters();sync();$$('.vw button').forEach(b=>b.classList.toggle('on',+b.dataset.c===cols));$('#sort').value=sort;
+ const c2=$('#clr2');if(c2)c2.onclick=clearAll}
+document.addEventListener('click',e=>{if(e.target.id==='mb'){shown+=24;render()}});
+$('#sort').onchange=e=>{sort=e.target.value;render()};
+$$('.vw button').forEach(b=>b.onclick=()=>{cols=+b.dataset.c;render()});
+document.addEventListener('stitch:wish',()=>{});
+/* filter panel */
+function renderFilters(){
+ const chips=(key,vals,lab=v=>v)=>vals.map(v=>{const n=apply(key).filter(p=>key==='sz'?sizesOf(p).includes(v):p[key]===v).length;return `<button class="chip ${F[key].includes(v)?'on':''}" data-k="${key}" data-v="${v}">${lab(v)}<small>${n}</small></button>`}).join('');
+ const szs=[...new Set(base.flatMap(sizesOf))];
+ $('#fb').innerHTML=`<div class="fg2"><h5 class="up">Cushioning</h5><div class="chips">${chips('cu',['Light Weight','Half Cushioned','Full Cushioned','Classic'].filter(v=>uniq('cu').includes(v)))}</div></div>
+ <div class="fg2"><h5 class="up">Cut</h5><div class="chips">${chips('cut',['Invisible','No Show','Low-Cut','Medium-Cut','Long-Cut'].filter(v=>uniq('cut').includes(v)))}</div></div>
+ <div class="fg2"><h5 class="up">Size</h5><div class="chips">${chips('sz',szs,sizeLabel)}</div></div>
+ <div class="fg2"><h5 class="up">Price</h5><div class="chips">${PR.map(([k,t,f])=>`<button class="chip ${F.pr.includes(k)?'on':''}" data-k="pr" data-v="${k}">${t}<small>${apply('pr').filter(f).length}</small></button>`).join('')}</div></div>
+ <div class="fg2"><div class="sw ${F.stock?'on':''}" id="stk"><span>In stock only</span><i></i></div></div>`}
+$('#fb').onclick=e=>{const c=e.target.closest('.chip');if(c){const a=F[c.dataset.k],v=c.dataset.v;const i=a.indexOf(v);i>-1?a.splice(i,1):a.push(v);shown=24;render();return}if(e.target.closest('#stk')){F.stock=!F.stock;shown=24;render()}};
+function clearAll(){F.cu=[];F.cut=[];F.sz=[];F.pr=[];F.stock=false;shown=24;render()}
+$('#fclr').onclick=clearAll;
+const fo=o=>{$('#fp').classList.toggle('on',o);$('#ov').classList.toggle('on',o)};
+$('#fo').onclick=()=>fo(true);$('#fx').onclick=$('#fdone').onclick=()=>fo(false);document.addEventListener('stitch:close',()=>$('#fp').classList.remove('on'));
+render();
+</script>
+</body>
+</html>
