@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stitch — Direction 2 · Pop Stripe</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;400;600;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#f6f1e7;--ink:#0d0d12;--blue:#2b3cff;--red:#ff4a2b;--sun:#ffc83d;--pink:#ffb5d0;--mint:#b8f0d0;--r:26px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+/* promo */
+.promo{background:var(--ink);color:var(--cream);overflow:hidden;white-space:nowrap;padding:9px 0}
+.promo div{display:inline-block;animation:mq 26s linear infinite}
+.promo span{margin:0 26px}.promo b{color:var(--sun)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* nav */
+nav{position:sticky;top:12px;z-index:50;margin:12px 16px 0;display:flex;justify-content:space-between;align-items:center;padding:10px 12px 10px 24px;background:rgba(246,241,231,.85);backdrop-filter:blur(14px);border:2px solid var(--ink);border-radius:99px}
+.logo{font-size:30px;font-weight:300;letter-spacing:-.05em}
+.logo i{font-style:normal;color:var(--red)}
+.nl{display:flex;gap:6px}
+.nl a{padding:10px 18px;border-radius:99px;font-weight:600;font-size:15px;transition:.2s}
+.nl a:hover{background:var(--ink);color:var(--cream)}
+.bagb{background:var(--blue);color:#fff;border-radius:99px;padding:12px 22px;font-weight:600;display:flex;gap:10px;align-items:center;transition:transform .2s}
+.bagb:hover{transform:scale(1.05) rotate(-2deg)}
+.bagb b{background:var(--sun);color:var(--ink);border-radius:50%;width:24px;height:24px;display:grid;place-items:center;font-size:13px}
+@media(max-width:800px){.nl{display:none}}
+/* hero */
+.hero{position:relative;padding:5vh 4vw 0;min-height:88vh;display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:2vw;overflow:hidden}
+@media(max-width:900px){.hero{grid-template-columns:1fr;text-align:left}}
+.hero h1{font-size:clamp(60px,11vw,190px);font-weight:800;line-height:.82;letter-spacing:-.06em}
+.hero h1 .l{display:block}
+.hero h1 .st{display:inline-block;background:var(--blue);color:var(--cream);padding:0 .12em;border-radius:.18em;transform:rotate(-3deg);margin-left:-.05em}
+.hero h1 .s2{color:var(--red)}
+.hero p{max-width:430px;font-size:19px;line-height:1.4;margin:3vh 0 4vh}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:18px 30px;border-radius:99px;border:2px solid var(--ink);font-weight:700;font-size:17px;transition:.25s;display:inline-flex;gap:10px}
+.btn.p{background:var(--ink);color:var(--cream)}.btn.p:hover{background:var(--red);border-color:var(--red);transform:translateY(-4px) rotate(-1.5deg);box-shadow:0 10px 0 var(--ink)}
+.btn.g:hover{background:var(--sun);transform:translateY(-4px) rotate(1.5deg);box-shadow:0 10px 0 var(--ink)}
+.stage{position:relative;height:min(78vh,720px);display:grid;place-items:center}
+.stage .blob{position:absolute;width:88%;aspect-ratio:1;background:var(--sun);border-radius:50% 46% 54% 50%/52% 48% 52% 48%;animation:morph 9s ease-in-out infinite;border:2px solid var(--ink)}
+@keyframes morph{50%{border-radius:44% 56% 46% 54%/56% 44% 56% 44%;transform:rotate(8deg)}}
+.stage svg.hs{position:relative;width:62%;filter:drop-shadow(10px 14px 0 rgba(13,13,18,.9));transition:transform .15s}
+.sticker{position:absolute;background:var(--cream);border:2px solid var(--ink);border-radius:99px;padding:10px 18px;font-weight:700;font-size:15px;box-shadow:4px 4px 0 var(--ink);animation:float 5s ease-in-out infinite}
+.sticker.a{left:2%;top:18%;transform:rotate(-8deg)}.sticker.b{right:0;top:50%;background:var(--pink);animation-delay:-2s;transform:rotate(6deg)}.sticker.c{left:8%;bottom:12%;background:var(--mint);animation-delay:-3.5s;transform:rotate(-4deg)}
+@keyframes float{50%{translate:0 -14px}}
+.spin{position:absolute;right:3%;top:2%;width:120px;height:120px;animation:rot 14s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+/* sections */
+section{padding:12vh 4vw}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:6vh}
+h2{font-size:clamp(44px,7vw,120px);font-weight:800;letter-spacing:-.055em;line-height:.88}
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.tile{border:2px solid var(--ink);border-radius:var(--r);overflow:hidden;position:relative;min-height:340px;display:flex;flex-direction:column;justify-content:space-between;padding:22px;transition:transform .35s cubic-bezier(.3,1.6,.5,1),box-shadow .35s}
+.tile:hover{transform:translate(-4px,-8px) rotate(-1deg);box-shadow:8px 12px 0 var(--ink)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;opacity:.92;transition:transform .8s}
+.tile:hover img{transform:scale(1.08)}
+.tile h3,.tile .go{position:relative;z-index:2}
+.tile h3{font-size:clamp(30px,4vw,64px);font-weight:800;letter-spacing:-.05em;line-height:.9}
+.tile .go{align-self:flex-start;background:var(--ink);color:var(--cream);border-radius:99px;padding:9px 16px;font-size:14px;font-weight:600}
+.t1{grid-column:span 5;background:var(--blue);color:#fff}.t2{grid-column:span 7;background:var(--pink)}.t3{grid-column:span 7;background:var(--mint)}.t4{grid-column:span 5;background:var(--red);color:#fff}
+.t1 .go,.t4 .go{background:var(--cream);color:var(--ink)}
+@media(max-width:800px){.tile{grid-column:span 12!important;min-height:260px}}
+/* builder */
+.build{background:var(--ink);color:var(--cream);border-radius:46px;margin:0 16px;padding:9vh 4vw}
+.bw{display:grid;grid-template-columns:1fr 1.05fr;gap:5vw;align-items:center}
+@media(max-width:900px){.bw{grid-template-columns:1fr}}
+.bs{aspect-ratio:1;background:var(--cream);border-radius:36px;display:grid;place-items:center;position:relative;overflow:hidden}
+.bs:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(13,13,18,.05) 38px 40px)}
+.bs svg{width:66%;position:relative;transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.bs:hover svg{transform:rotate(-6deg) scale(1.05)}
+.bs .pr{position:absolute;left:20px;bottom:20px;background:var(--ink);color:var(--cream);padding:12px 20px;border-radius:99px;font-weight:700;font-size:20px}
+.ctl{margin-bottom:28px}
+.ctl .mono{color:var(--sun);display:block;margin-bottom:12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:12px 20px;border-radius:99px;border:2px solid rgba(246,241,231,.3);font-weight:600;transition:.2s}
+.chip:hover{border-color:var(--cream)}.chip.on{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.sw{display:flex;gap:10px;flex-wrap:wrap}
+.sw button{width:46px;height:46px;border-radius:50%;border:3px solid transparent;outline:2px solid rgba(246,241,231,.25);transition:.2s}
+.sw button:hover{transform:scale(1.15)}.sw button.on{outline:3px solid var(--cream);outline-offset:3px}
+.build .btn{background:var(--sun);color:var(--ink);border-color:var(--sun);margin-top:6px}
+.build .btn:hover{background:var(--cream);box-shadow:0 10px 0 var(--red);transform:translateY(-4px) rotate(-1deg)}
+.build h2{margin-bottom:5vh}
+/* shop */
+.fil{display:flex;gap:8px;flex-wrap:wrap}
+.pg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:1000px){.pg{grid-template-columns:1fr 1fr}}
+.pc{border:2px solid var(--ink);border-radius:var(--r);background:#fff;overflow:hidden;transition:.3s cubic-bezier(.3,1.6,.5,1);display:flex;flex-direction:column}
+.pc:hover{transform:translateY(-8px) rotate(var(--rot,-1deg));box-shadow:6px 10px 0 var(--ink)}
+.pc .im{aspect-ratio:1;background:var(--bgc,#eee);position:relative;overflow:hidden}
+.pc img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;transition:transform .6s}
+.pc:hover img{transform:scale(1.1)}
+.pc .tg{position:absolute;left:12px;top:12px;background:var(--ink);color:var(--cream);border-radius:99px;padding:6px 12px;font-size:12px;font-weight:700}
+.pc .bd{padding:16px;display:flex;flex-direction:column;gap:2px;flex:1}
+.pc h4{font-size:17px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.pc small{color:#777;font-size:13px}
+.pc .ft{margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;align-items:center}
+.pc .ft b{font-size:20px;letter-spacing:-.03em}
+.plus{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--cream);font-size:22px;transition:.25s}
+.plus:hover{background:var(--red);transform:rotate(90deg) scale(1.1)}
+/* story */
+.story{display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center}
+@media(max-width:900px){.story{grid-template-columns:1fr}}
+.story p{font-size:clamp(20px,2vw,28px);line-height:1.3;letter-spacing:-.02em;margin-top:4vh}
+.story p mark{background:var(--sun);padding:0 .15em;border-radius:6px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cards div{border:2px solid var(--ink);border-radius:var(--r);padding:26px;aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between}
+.cards b{font-size:clamp(56px,7vw,110px);font-weight:800;letter-spacing:-.07em;line-height:.8}
+.cards div:nth-child(1){background:var(--blue);color:#fff}.cards div:nth-child(2){background:var(--sun)}.cards div:nth-child(3){background:var(--pink)}.cards div:nth-child(4){background:var(--mint)}
+footer{background:var(--blue);color:#fff;border-radius:46px 46px 0 0;margin:0 16px;padding:10vh 4vw 5vh;overflow:hidden}
+footer .ft{font-size:clamp(52px,12vw,220px);font-weight:800;letter-spacing:-.07em;line-height:.85}
+footer .ft em{font-style:normal;color:var(--sun)}
+.fm{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-top:6vh;align-items:flex-end}
+.nlf{display:flex;background:#fff;border-radius:99px;padding:6px;min-width:320px}
+.nlf input{flex:1;border:0;outline:0;background:none;padding:0 18px;font:inherit;color:var(--ink)}
+.nlf button{background:var(--ink);color:#fff;border-radius:99px;padding:14px 24px;font-weight:700}
+/* drawer */
+.ov{position:fixed;inset:0;background:rgba(13,13,18,.5);opacity:0;pointer-events:none;transition:.3s;z-index:90}.ov.on{opacity:1;pointer-events:auto}
+.dr{position:fixed;right:12px;top:12px;bottom:12px;width:min(420px,calc(100% - 24px));background:var(--cream);border:2px solid var(--ink);border-radius:30px;z-index:100;transform:translateX(120%);transition:transform .5s cubic-bezier(.3,1.3,.5,1);display:flex;flex-direction:column;padding:24px}
+.dr.on{transform:none}
+.dr header{display:flex;justify-content:space-between;align-items:center;font-size:30px;font-weight:800;letter-spacing:-.04em;margin-bottom:12px}
+.x{width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);font-size:18px}.x:hover{background:var(--red);color:#fff}
+.items{flex:1;overflow:auto}
+.it{display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:center;padding:12px 0;border-bottom:2px dashed rgba(13,13,18,.2)}
+.it .th{width:72px;height:72px;border-radius:16px;overflow:hidden;background:#eee;border:2px solid var(--ink)}.it .th img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply}
+.it small{display:block;color:#777}
+.qty{display:flex;gap:8px;align-items:center;margin-top:6px;font-weight:700}.qty button{width:26px;height:26px;border-radius:50%;border:2px solid var(--ink);font-size:14px;line-height:1}
+.ship{background:#fff;border:2px solid var(--ink);border-radius:18px;padding:12px 14px;margin:12px 0;font-size:14px;font-weight:600}
+.ship div{height:10px;background:#eee;border-radius:99px;margin-top:8px;overflow:hidden;border:1.5px solid var(--ink)}.ship i{display:block;height:100%;background:var(--red);transition:width .5s}
+.tot{display:flex;justify-content:space-between;font-size:26px;font-weight:800;margin-bottom:14px;letter-spacing:-.03em}
+.dr .btn{width:100%;justify-content:center}
+.empty{text-align:center;margin-top:40px;color:#777}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120px) rotate(-3deg);background:var(--sun);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:14px 24px;border-radius:99px;font-weight:700;z-index:120;transition:transform .5s cubic-bezier(.3,1.6,.5,1)}.toast.on{transform:translate(-50%,0) rotate(-2deg)}
+.rv{opacity:0;transform:translateY(40px) rotate(1.5deg);transition:.8s cubic-bezier(.2,.9,.3,1)}.rv.in{opacity:1;transform:none}
+.dirtag{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:60;background:var(--ink);color:var(--cream);padding:8px 16px;border-radius:99px;font-size:12px;font-weight:600}
+.dirtag a{color:var(--sun);margin-left:10px}
+</style>
+</head>
+<body>
+<div class="promo"><div id="pm"></div></div>
+<nav>
+  <a href="#" class="logo">Stitch<i>.</i></a>
+  <div class="nl"><a href="#cols">Collections</a><a href="#build">Build a sock</a><a href="#shop">Shop</a><a href="#story">Story</a></div>
+  <button class="bagb" id="bagBtn">Bag <b id="cnt">0</b></button>
+</nav>
+
+<header class="hero">
+  <div>
+    <h1><span class="l">Comfort</span><span class="l">in <span class="st">every</span></span><span class="l s2">step.</span></h1>
+    <p>Egypt's favourite sock brand. Cushioned heel to toe, stripe-obsessed, made to be seen.</p>
+    <div class="btns"><a class="btn p" href="#build">Build your sock →</a><a class="btn g" href="#shop">Shop all</a></div>
+  </div>
+  <div class="stage" id="stage">
+    <div class="blob"></div>
+    <svg class="spin" viewBox="0 0 120 120"><defs><path id="c" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs><text font-family="DM Mono" font-size="12.5" letter-spacing="3.4" font-weight="500"><textPath href="#c">FREE SHIPPING OVER 800 EGP ✦ </textPath></text></svg>
+    <svg class="hs" id="hs" viewBox="0 0 220 300"></svg>
+    <div class="sticker a">Half-cushioned ☁️</div><div class="sticker b">Two stripes ✌️</div><div class="sticker c">10 yrs strong</div>
+  </div>
+</header>
+
+<section id="cols">
+  <div class="sh"><h2>Pick your<br>people.</h2><span class="mono">04 collections</span></div>
+  <div class="tiles">
+    <a class="tile t1 rv" data-f="men"><img src="https://stitcheg.com/cdn/shop/files/Men_s_Collection.jpg?v=1697985299&width=900" alt=""><h3>Men</h3><span class="go">Shop men →</span></a>
+    <a class="tile t2 rv" data-f="women"><img src="https://stitcheg.com/cdn/shop/files/Women_s_Collection.jpg?v=1698058724&width=900" alt=""><h3>Women</h3><span class="go">Shop women →</span></a>
+    <a class="tile t3 rv" data-f="kids"><img src="https://stitcheg.com/cdn/shop/files/Young_Kids_and_Babies_Collection.jpg?v=1697985433&width=900" alt=""><h3>Kids &amp; Babies</h3><span class="go">Shop kids →</span></a>
+    <a class="tile t4 rv" data-f="trendy"><img src="https://stitcheg.com/cdn/shop/files/day_1_4.jpg?v=1746379297&width=900" alt=""><h3>Trendy</h3><span class="go">Shop trendy →</span></a>
+  </div>
+</section>
+
+<section class="build" id="build">
+  <h2>Build your<br>perfect sock.</h2>
+  <div class="bw">
+    <div class="bs"><svg id="bsv" viewBox="0 0 220 300"></svg><div class="pr" id="bp">200 EGP</div></div>
+    <div>
+      <div class="ctl"><span class="mono">01 · Cut</span><div class="chips" id="cutC"></div></div>
+      <div class="ctl"><span class="mono">02 · Cushion</span><div class="chips" id="cusC"></div></div>
+      <div class="ctl"><span class="mono">03 · Body colour</span><div class="sw" id="swB"></div></div>
+      <div class="ctl"><span class="mono">04 · Stripe colour</span><div class="sw" id="swS"></div></div>
+      <button class="btn" id="bAdd">Add custom sock to bag +</button>
+    </div>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="sh"><h2>Fresh<br>pairs.</h2><div class="fil" id="fil"></div></div>
+  <div class="pg" id="pg"></div>
+</section>
+
+<section id="story">
+  <div class="story">
+    <div><h2>Friends first.<br>Socks <span style="color:var(--red)">second.</span></h2>
+    <p>Two ambitious friends launched their <mark>very first sock brand</mark>. Over a decade later we're still working 24/7 on one promise: the highest quality, unmatched comfort. Everything has its beginning — <mark>yours starts with your feet.</mark></p></div>
+    <div class="cards"><div><b>10+</b><span class="mono">years of socks</span></div><div><b>4</b><span class="mono">collections</span></div><div><b>24/7</b><span class="mono">full capacity</span></div><div><b>800</b><span class="mono">EGP free ship</span></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">We know<br>the <em>drill.</em></div>
+  <div class="fm"><div class="nlf"><input placeholder="Drop us a line"><button>Send</button></div><span class="mono">© 2026 Stitch Trade EG · Cairo</span></div>
+</footer>
+
+<div class="ov" id="ov"></div>
+<aside class="dr" id="dr"><header><span>Bag</span><button class="x" id="cl">✕</button></header><div class="items" id="items"></div><div class="ship"><span id="shT"></span><div><i id="shB"></i></div></div><div class="tot"><span>Total</span><span id="tot">0</span></div><a class="btn p" href="#">Checkout →</a></aside>
+<div class="toast" id="toast">Added!</div>
+<div class="dirtag">Direction 2 · Pop Stripe <a href="direction-1-noir.html">← 1</a><a href="direction-3-soft.html">3 →</a></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const C='https://cdn.shopify.com/s/files/1/0605/1476/2930/';
+const COL={White:'#f7f4ee',Ink:'#0d0d12',Cobalt:'#2b3cff',Tomato:'#ff4a2b',Sun:'#ffc83d',Pink:'#ffb5d0',Mint:'#b8f0d0'};
+const BGS=['#ffe3a1','#ffc9dc','#cdd2ff','#c9f3dc','#ffd2c7'];
+const P=[
+{id:1,n:"Medium-Cut Half-Cushioned",c:"men",p:200,s:"Men · 42–45",img:C+'products/16.jpg?v=1643377119&width=600',tag:"Best seller"},
+{id:2,n:"Long-Cut Half-Cushioned",c:"men",p:220,s:"Men · 42–45",img:C+'products/7.jpg?v=1643378151&width=600'},
+{id:3,n:"Low-Cut Half-Cushioned",c:"men",p:190,s:"Men · 42–45",img:C+'products/25_f7b30d26-65e7-484d-b9c4-8bbdb84816ad.jpg?v=1643375441&width=600'},
+{id:4,n:"Long-Cut Classic",c:"women",p:160,s:"Women · 38–41",img:C+'products/P3J-W-9_1.jpg?v=1641143711&width=600',tag:"New"},
+{id:5,n:"Low-Cut Half-Cushioned",c:"women",p:190,s:"Women · 38–41",img:C+'products/112.jpg?v=1644941175&width=600'},
+{id:6,n:"No Show Light Weight",c:"women",p:145,s:"Women · 38–41",img:C+'products/119_2d3243e3-9596-4fa1-918a-b837abf3cb5d.jpg?v=1644946376&width=600'},
+{id:7,n:"Medium-Cut Half-Cushioned",c:"kids",p:130,s:"Kids · 26–37",img:C+'files/P3L-B-1WR.jpg?v=1716128503&width=600'},
+{id:8,n:"Low-Cut Light Weight",c:"kids",p:115,s:"Kids · 26–37",img:C+'files/P3N-S-100_NEW.jpg?v=1723548746&width=600'},
+{id:9,n:"Two Striped Long-Cut",c:"trendy",p:220,s:"Unisex",img:C+'files/P3C-S-100-105.jpg?v=1746001499&width=600',tag:"Trending"},
+{id:10,n:"Two Striped Long-Cut",c:"trendy",p:90,s:"Unisex",img:C+'products/IC-S-640.jpg?v=1649601862&width=600'},
+{id:11,n:"Two Striped Long-Cut",c:"trendy",p:90,s:"Unisex",img:C+'products/IC-S-260.jpg?v=1649601561&width=600'},
+{id:12,n:"Invisible Light Weight",c:"men",p:145,s:"Men · 42–45",img:C+'products/P3K-W-1_3fd78de8-0bf4-49e8-ba49-a4ba734a82c5.jpg?v=1643380102&width=600'}
+];
+let cart=JSON.parse(sessionStorage.getItem('s2')||'{}'),custom=JSON.parse(sessionStorage.getItem('s2c')||'[]'),filter='all';
+// sock svg
+function sock(o){const{top=10,body='#2b3cff',acc='#f7f4ee',stripes=2,id='x'}=o;
+ let st='';for(let i=0;i<stripes;i++)st+=`<rect x="40" y="${top+14+i*18}" width="110" height="9" fill="${acc}"/>`;
+ return `<defs><clipPath id="cp${id}"><path d="M62,10 L132,10 L132,160 C132,176 140,183 156,191 L184,207 C201,216 203,247 185,259 C172,268 160,271 140,271 L84,271 C62,271 55,252 58,232 Z"/></clipPath></defs>
+ <g clip-path="url(#cp${id})"><rect x="0" y="${top}" width="220" height="300" fill="${body}"/>${st}
+ <path d="M40,215 C70,205 95,215 92,271 L40,271Z" fill="${acc}" opacity=".95"/><path d="M165,222 C190,222 215,230 215,271 L150,271Z" fill="${acc}" opacity=".95"/>
+ <path d="M62,${top} L62,232" stroke="rgba(0,0,0,.12)" stroke-width="10" fill="none"/></g>
+ <path d="M62,10 L132,10 L132,160 C132,176 140,183 156,191 L184,207 C201,216 203,247 185,259 C172,268 160,271 140,271 L84,271 C62,271 55,252 58,232 Z" fill="none" stroke="#0d0d12" stroke-width="3.5" stroke-linejoin="round" style="clip-path:inset(${top-6}px 0 0 0)"/>`}
+$('#hs').innerHTML=sock({body:COL.Tomato,acc:COL.White,id:'h'});
+const hs=$('#hs');addEventListener('mousemove',e=>{if(innerWidth<900)return;const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);hs.style.transform=`rotate(${x*18-6}deg) translate(${x*30}px,${y*20}px)`});
+// promo
+$('#pm').innerHTML=Array(14).fill('<span>Free shipping over <b>800 EGP</b></span><span>✦</span><span>Comfort in every step</span><span>✦</span>').join('');
+// builder
+const CUTS=[['Invisible',200,'Invisible'],['Low',150,'Low-Cut'],['Medium',90,'Medium-Cut'],['Long',10,'Long-Cut']];
+const CUS=[['Light',0],['Half',45],['Full',90]];
+const base={Invisible:130,Low:145,Medium:160,Long:175};
+const B={cut:2,cus:1,body:'Cobalt',acc:'White'};
+$('#cutC').innerHTML=CUTS.map((c,i)=>`<button class="chip" data-i="${i}">${c[2]}</button>`).join('');
+$('#cusC').innerHTML=CUS.map((c,i)=>`<button class="chip" data-i="${i}">${c[0]}</button>`).join('');
+const sw=id=>Object.entries(COL).map(([k,v])=>`<button title="${k}" data-k="${k}" style="background:${v}"></button>`).join('');
+$('#swB').innerHTML=sw();$('#swS').innerHTML=sw();
+function bprice(){return base[CUTS[B.cut][0]]+CUS[B.cus][1]}
+function renB(){
+ document.querySelectorAll('#cutC .chip').forEach((c,i)=>c.classList.toggle('on',i===B.cut));
+ document.querySelectorAll('#cusC .chip').forEach((c,i)=>c.classList.toggle('on',i===B.cus));
+ document.querySelectorAll('#swB button').forEach(b=>b.classList.toggle('on',b.dataset.k===B.body));
+ document.querySelectorAll('#swS button').forEach(b=>b.classList.toggle('on',b.dataset.k===B.acc));
+ $('#bsv').innerHTML=sock({top:CUTS[B.cut][1],body:COL[B.body],acc:COL[B.acc],stripes:B.cut>0?2:0,id:'b'});
+ $('#bp').textContent=bprice()+' EGP';
+}
+$('#cutC').onclick=e=>{const c=e.target.closest('.chip');if(c){B.cut=+c.dataset.i;renB()}};
+$('#cusC').onclick=e=>{const c=e.target.closest('.chip');if(c){B.cus=+c.dataset.i;renB()}};
+$('#swB').onclick=e=>{const c=e.target.closest('button');if(c){B.body=c.dataset.k;renB()}};
+$('#swS').onclick=e=>{const c=e.target.closest('button');if(c){B.acc=c.dataset.k;renB()}};
+$('#bAdd').onclick=()=>{custom.push({cut:B.cut,cus:B.cus,body:B.body,acc:B.acc,p:bprice(),q:1,n:`Custom ${CUTS[B.cut][2]} ${CUS[B.cus][0]}`});save();toast('Custom sock added 🧦')};
+// shop
+$('#fil').innerHTML=[['all','All'],['men','Men'],['women','Women'],['kids','Kids'],['trendy','Trendy']].map(f=>`<button class="chip" data-f="${f[0]}" style="border-color:#0d0d12">${f[1]}</button>`).join('');
+function renP(){
+ document.querySelectorAll('#fil .chip').forEach(c=>c.classList.toggle('on',c.dataset.f===filter));
+ $('#pg').innerHTML=P.filter(p=>filter==='all'||p.c===filter).map((p,i)=>`<article class="pc" style="--bgc:${BGS[i%5]};--rot:${i%2?1:-1}deg"><div class="im">${p.tag?`<span class="tg">${p.tag}</span>`:''}<img loading="lazy" src="${p.img}" alt=""></div><div class="bd"><h4>${p.n}</h4><small>${p.s}</small><div class="ft"><b>${p.p} <small style="font-size:12px">EGP</small></b><button class="plus" data-id="${p.id}">+</button></div></div></article>`).join('');
+}
+$('#fil').onclick=e=>{const c=e.target.closest('.chip');if(c){filter=c.dataset.f;renP()}};
+document.querySelectorAll('.tile').forEach(t=>t.onclick=()=>{filter=t.dataset.f;renP();$('#shop').scrollIntoView()});
+// cart
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),1700)};
+function save(){sessionStorage.setItem('s2',JSON.stringify(cart));sessionStorage.setItem('s2c',JSON.stringify(custom));renCart()}
+function renCart(){let tot=0,n=0,h='';
+ Object.keys(cart).forEach(id=>{const p=P.find(x=>x.id==id),q=cart[id];tot+=p.p*q;n+=q;h+=`<div class="it"><div class="th"><img src="${p.img}"></div><div><b>${p.n}</b><small>${p.s}</small><div class="qty"><button data-d="-1" data-id="${id}">−</button>${q}<button data-d="1" data-id="${id}">+</button></div></div><b>${p.p*q}</b></div>`});
+ custom.forEach((c,i)=>{tot+=c.p;n++;h+=`<div class="it"><div class="th" style="background:#f6f1e7"><svg viewBox="40 0 160 290">${sock({top:CUTS[c.cut][1],body:COL[c.body],acc:COL[c.acc],stripes:c.cut>0?2:0,id:'c'+i})}</svg></div><div><b>${c.n}</b><small>${c.body} / ${c.acc}</small><div class="qty"><button data-rm="${i}">Remove</button></div></div><b>${c.p}</b></div>`});
+ $('#items').innerHTML=h||'<p class="empty">Bag\'s empty. Your feet deserve better 🧦</p>';
+ $('#cnt').textContent=n;$('#tot').textContent=tot+' EGP';const l=800-tot;$('#shT').textContent=l>0?`${l} EGP to free shipping`:'Free shipping unlocked 🎉';$('#shB').style.width=Math.min(100,tot/8)+'%'}
+document.addEventListener('click',e=>{
+ const a=e.target.closest('.plus');if(a){cart[a.dataset.id]=(cart[a.dataset.id]||0)+1;save();toast('Added!');return}
+ const q=e.target.closest('.qty button');if(q){if(q.dataset.rm!==undefined){custom.splice(+q.dataset.rm,1)}else{const id=q.dataset.id;cart[id]+=+q.dataset.d;if(cart[id]<=0)delete cart[id]}save()}});
+const dr=o=>{$('#dr').classList.toggle('on',o);$('#ov').classList.toggle('on',o)};
+$('#bagBtn').onclick=()=>dr(true);$('#cl').onclick=$('#ov').onclick=()=>dr(false);
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*.08+'s';io.observe(el)});
+renB();renP();renCart();
+</script>
+</body>
+</html>

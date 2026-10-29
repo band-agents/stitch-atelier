@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stitch — C · Campaign</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0b;--fg:#f2f0ec;--mut:#8c8982;--line:rgba(255,255,255,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Hanken Grotesk',sans-serif;font-weight:300;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+header{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:26px 3vw;mix-blend-mode:difference;color:#fff}
+.logo{font-size:36px;font-weight:200;letter-spacing:-.04em}
+.nav{display:flex;gap:34px;font-size:12px;letter-spacing:.2em;text-transform:uppercase}.nav a{opacity:.75}.nav a:hover{opacity:1}
+.bagb{font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+@media(max-width:800px){.nav{display:none}}
+.idx{position:fixed;left:3vw;top:50%;transform:translateY(-50%);z-index:35;display:grid;gap:14px;mix-blend-mode:difference;color:#fff}
+.idx a{width:22px;height:1px;background:#fff;opacity:.35;transition:.3s}.idx a.on{width:44px;opacity:1}
+@media(max-width:800px){.idx{display:none}}
+.pn{position:relative;height:100vh;min-height:560px;overflow:hidden;display:flex;align-items:flex-end}
+.pn>img,.pn>video{position:absolute;inset:-6% 0;width:100%;height:112%;object-fit:cover;will-change:transform}
+.pn:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(0,0,0,.72))}
+.pc{position:relative;z-index:2;width:100%;padding:0 3vw 7vh 6vw;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.pc small{font-size:12px;letter-spacing:.24em;text-transform:uppercase;opacity:.8}
+.pc h2{font-weight:200;font-size:clamp(52px,10vw,170px);line-height:.88;letter-spacing:-.05em;margin-top:14px}
+.pc h1{font-weight:200;font-size:clamp(52px,10vw,170px);line-height:.88;letter-spacing:-.05em;margin-top:14px}
+.go{font-size:12px;letter-spacing:.22em;text-transform:uppercase;display:inline-flex;gap:14px;align-items:center;border-bottom:1px solid #fff;padding-bottom:8px;transition:gap .3s}.go:hover{gap:26px}
+.txt{padding:20vh 3vw 20vh 6vw;display:grid;grid-template-columns:1fr 1.3fr;gap:6vw}
+@media(max-width:900px){.txt{grid-template-columns:1fr}}
+.txt small{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}
+.txt p{font-weight:200;font-size:clamp(26px,3.2vw,50px);line-height:1.2;letter-spacing:-.025em}
+.txt p span{color:var(--mut)}
+.strip{padding:0 0 16vh}
+.sh{display:flex;justify-content:space-between;align-items:baseline;padding:0 3vw 0 6vw;margin-bottom:36px;flex-wrap:wrap;gap:20px}
+.sh h3{font-weight:200;font-size:clamp(30px,3.4vw,52px);letter-spacing:-.03em}
+.tabs{display:flex;gap:28px;font-size:12px;letter-spacing:.2em;text-transform:uppercase}.tabs button{color:var(--mut);padding-bottom:5px;border-bottom:1px solid transparent}.tabs button.on,.tabs button:hover{color:var(--fg);border-color:var(--fg)}
+.rail{display:flex;gap:2px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 3vw 0 6vw;scrollbar-width:none}.rail::-webkit-scrollbar{display:none}
+.p{flex:0 0 clamp(260px,27vw,400px);scroll-snap-align:start}
+.p .im{aspect-ratio:4/5;background:#ebe9e4;position:relative;overflow:hidden}
+.p img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;transition:transform 1.2s cubic-bezier(.2,.7,.1,1)}.p:hover img{transform:scale(1.05)}
+.p .qa{position:absolute;left:14px;bottom:14px;background:#0b0b0b;color:#fff;padding:12px 20px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:0;transform:translateY(10px);transition:.35s}.p:hover .qa{opacity:1;transform:none}.p .qa:hover{background:#fff;color:#0b0b0b}
+.p .m{display:flex;justify-content:space-between;gap:12px;padding:16px 4px 0 0;font-size:14px}.p .m small{color:var(--mut);display:block;margin-top:3px;font-size:13px}.p .m b{font-weight:400}
+.ar{display:flex;gap:10px;padding:34px 3vw 0 6vw}.ar button{width:52px;height:52px;border:1px solid var(--line);border-radius:50%;font-size:18px;transition:.25s}.ar button:hover{background:var(--fg);color:var(--bg)}
+.gd{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line)}
+@media(max-width:900px){.gd{grid-template-columns:1fr}}
+.gd a{padding:6vh 3vw 6vh 6vw;border-right:1px solid var(--line);display:grid;gap:30px;transition:background .4s}.gd a:last-child{border:0}.gd a:hover{background:#151515}
+.gd .im{aspect-ratio:4/3;overflow:hidden}.gd img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter .6s,transform 1.2s}.gd a:hover img{filter:none;transform:scale(1.04)}
+.gd small{font-size:11px;letter-spacing:.24em;color:var(--mut)}.gd h4{font-weight:200;font-size:32px;letter-spacing:-.03em;margin:6px 0}.gd p{font-size:14px;color:var(--mut)}
+.gt{padding:16vh 6vw 0}.gt small{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}.gt h3{font-weight:200;font-size:clamp(34px,4vw,64px);letter-spacing:-.035em;margin-top:14px}
+footer{padding:14vh 3vw 4vh 6vw}
+.big{font-weight:200;font-size:clamp(100px,26vw,460px);line-height:.8;letter-spacing:-.07em;margin-bottom:8vh}
+.fr{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;font-size:13px;color:var(--mut);align-items:flex-end}
+.fr input{background:none;border:0;border-bottom:1px solid var(--mut);padding:12px 0;color:var(--fg);font:inherit;outline:0;min-width:300px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:.4s;z-index:90}.ov.on{opacity:1;pointer-events:auto}
+.dr{position:fixed;right:0;top:0;bottom:0;width:min(420px,100%);background:#111;z-index:100;transform:translateX(100%);transition:transform .55s cubic-bezier(.2,.7,.1,1);display:flex;flex-direction:column;padding:30px;border-left:1px solid var(--line)}.dr.on{transform:none}
+.dr h3{display:flex;justify-content:space-between;font-weight:200;font-size:26px;padding-bottom:20px;border-bottom:1px solid var(--line)}.dr h3 button{font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.items{flex:1;overflow:auto}.it{display:grid;grid-template-columns:74px 1fr auto;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}.it img{width:74px;height:92px;object-fit:cover;background:#ebe9e4;mix-blend-mode:multiply}.it b{font-weight:400;font-size:14px;display:block}.it small{color:var(--mut)}.qty{margin-top:10px;display:flex;gap:14px}.qty button{color:var(--mut)}
+.tot{display:flex;justify-content:space-between;margin:18px 0;font-size:18px}
+.dr .go{justify-content:center;border:0;background:var(--fg);color:var(--bg);padding:18px}.empty{text-align:center;color:var(--mut);margin-top:60px}
+.rv{opacity:0;transform:translateY(26px);transition:1.1s cubic-bezier(.2,.7,.1,1)}.rv.in{opacity:1;transform:none}
+.dirtag{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:60;background:#f2f0ec;color:#0b0b0b;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px}.dirtag a{margin-left:12px;opacity:.55}
+</style>
+</head>
+<body>
+<header><a class="logo" href="#">Stitch</a><nav class="nav"><a href="#men">Men</a><a href="#women">Women</a><a href="#kids">Kids</a><a href="#trendy">Trendy</a></nav><button class="bagb" id="bagBtn">Bag (<span id="cnt">0</span>)</button></header>
+<div class="idx" id="idx"><a href="#top"></a><a href="#men"></a><a href="#women"></a><a href="#kids"></a><a href="#trendy"></a><a href="#shop"></a></div>
+
+<section class="pn" id="top"><img data-p src="https://stitcheg.com/cdn/shop/files/day_1_4.jpg?v=1746379297&width=1800" alt=""><video data-p autoplay muted loop playsinline src="https://cdn.shopify.com/videos/c/o/v/7425a2f3f30648dea41acade7dca494d.mp4"></video><div class="pc"><div><small>Stitch · Cairo</small><h1>Comfort in<br>every step.</h1></div><a class="go" href="#men">Explore ↓</a></div></section>
+
+<section class="txt"><small class="rv">About</small><p class="rv">Two friends. One promise. <span>Socks with commitment, ambition and trust — cushioned heel to toe, because your comfort begins with your feet.</span></p></section>
+
+<section class="pn" id="men"><img data-p src="https://stitcheg.com/cdn/shop/files/Men_s_Collection.jpg?v=1697985299&width=1800" alt=""><div class="pc"><div><small>01 — Collection</small><h2>Men</h2></div><a class="go" data-f="men" href="#shop">Shop men →</a></div></section>
+<section class="pn" id="women"><img data-p src="https://stitcheg.com/cdn/shop/files/Women_s_Collection.jpg?v=1698058724&width=1800" alt=""><div class="pc"><div><small>02 — Collection</small><h2>Women</h2></div><a class="go" data-f="women" href="#shop">Shop women →</a></div></section>
+<section class="pn" id="kids"><img data-p src="https://stitcheg.com/cdn/shop/files/Young_Kids_and_Babies_Collection.jpg?v=1697985433&width=1800" alt=""><div class="pc"><div><small>03 — Collection</small><h2>Kids &amp; Babies</h2></div><a class="go" data-f="kids" href="#shop">Shop kids →</a></div></section>
+<section class="pn" id="trendy"><img data-p src="https://stitcheg.com/cdn/shop/files/1P0A2184-Edit-2.jpg?v=1698260346&width=1800" alt=""><div class="pc"><div><small>04 — Collection</small><h2>Trendy</h2></div><a class="go" data-f="trendy" href="#shop">Shop trendy →</a></div></section>
+
+<section class="strip" id="shop" style="padding-top:14vh">
+  <div class="sh"><h3>Best sellers</h3><div class="tabs" id="tabs"></div></div>
+  <div class="rail" id="rail"></div>
+  <div class="ar"><button id="pv">←</button><button id="nx">→</button></div>
+</section>
+
+<div class="gt"><small>We know the drill</small><h3>Find your sock.</h3></div>
+<section class="gd" style="margin-top:6vh">
+  <a><div class="im"><img src="https://stitcheg.com/cdn/shop/files/Find_Your_Sock_Classic-Light_Weight_824d5d15-1f72-4813-8cf0-80854d3ced8c.jpg?v=1698065563&width=800" alt=""></div><div><small>01</small><h4>Light weight</h4><p>Thin, breathable, everyday classics.</p></div></a>
+  <a><div class="im"><img src="https://stitcheg.com/cdn/shop/files/Find_Your_Sock_Half-Cushioned.jpg?v=1698259509&width=800" alt=""></div><div><small>02</small><h4>Half cushioned</h4><p>Cushioning from heel to toe.</p></div></a>
+  <a><div class="im"><img src="https://stitcheg.com/cdn/shop/files/Find_Your_Sock_Full-Cushioned_option_2_e09af3be-20ff-4fee-a151-bb3234053b1a.jpg?v=1698065946&width=800" alt=""></div><div><small>03</small><h4>Full cushioned</h4><p>Maximum softness, all day.</p></div></a>
+</section>
+
+<footer><div class="big">Stitch</div><div class="fr"><input placeholder="Drop us a line — email"><span>Free shipping over 800 EGP</span><span>© 2026 Stitch Trade EG</span></div></footer>
+
+<div class="ov" id="ov"></div>
+<aside class="dr" id="dr"><h3><span>Bag</span><button id="cl">Close</button></h3><div class="items" id="items"></div><div class="tot"><span>Total</span><span id="tot">0 EGP</span></div><a class="go" href="#">Checkout</a></aside>
+<div class="dirtag">C · Campaign <a href="v2-a-atelier.html">A</a><a href="v2-b-stone.html">B</a></div>
+
+<script>
+const $=s=>document.querySelector(s);const C='https://cdn.shopify.com/s/files/1/0605/1476/2930/';
+const P=[
+{id:1,n:"Medium-Cut Half-Cushioned",c:"men",p:200,s:"Men · 42–45",img:C+'products/16.jpg?v=1643377119&width=700'},
+{id:2,n:"Long-Cut Half-Cushioned",c:"men",p:220,s:"Men · 42–45",img:C+'products/7.jpg?v=1643378151&width=700'},
+{id:3,n:"Low-Cut Half-Cushioned",c:"men",p:190,s:"Men · 42–45",img:C+'products/25_f7b30d26-65e7-484d-b9c4-8bbdb84816ad.jpg?v=1643375441&width=700'},
+{id:4,n:"Long-Cut Classic",c:"women",p:160,s:"Women · 38–41",img:C+'products/P3J-W-9_1.jpg?v=1641143711&width=700'},
+{id:5,n:"Low-Cut Half-Cushioned",c:"women",p:190,s:"Women · 38–41",img:C+'products/112.jpg?v=1644941175&width=700'},
+{id:6,n:"Low-Cut Light Weight",c:"women",p:130,s:"Women · 38–41",img:C+'products/119.jpg?v=1644945826&width=700'},
+{id:7,n:"Medium-Cut Half-Cushioned",c:"kids",p:130,s:"Kids · 26–37",img:C+'files/P3L-B-1WR.jpg?v=1716128503&width=700'},
+{id:8,n:"Low-Cut Light Weight",c:"kids",p:115,s:"Kids · 26–37",img:C+'files/P3N-S-100_NEW.jpg?v=1723548746&width=700'},
+{id:9,n:"Two Striped Long-Cut",c:"trendy",p:220,s:"Unisex",img:C+'files/P3C-S-100-105.jpg?v=1746001499&width=700'},
+{id:10,n:"Two Striped Long-Cut",c:"trendy",p:90,s:"Unisex",img:C+'products/IC-S-640.jpg?v=1649601862&width=700'}];
+let cart=[],filter='all';
+$('#tabs').innerHTML=[['all','All'],['men','Men'],['women','Women'],['kids','Kids'],['trendy','Trendy']].map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join('');
+function rp(){document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===filter));
+$('#rail').innerHTML=P.filter(p=>filter==='all'||p.c===filter).map(p=>`<article class="p"><div class="im"><img loading="lazy" src="${p.img}" alt=""><button class="qa" data-id="${p.id}">Add to bag</button></div><div class="m"><div>${p.n}<small>${p.s}</small></div><b>${p.p} EGP</b></div></article>`).join('');$('#rail').scrollLeft=0}
+$('#tabs').onclick=e=>{const b=e.target.closest('button');if(b){filter=b.dataset.t;rp()}};
+document.querySelectorAll('[data-f]').forEach(a=>a.addEventListener('click',()=>{filter=a.dataset.f;rp()}));
+$('#pv').onclick=()=>$('#rail').scrollBy({left:-420,behavior:'smooth'});$('#nx').onclick=()=>$('#rail').scrollBy({left:420,behavior:'smooth'});
+function rc(){let t=0,n=0;$('#items').innerHTML=cart.length?cart.map((l,i)=>{const p=P.find(x=>x.id===l.id);t+=p.p*l.q;n+=l.q;return `<div class="it"><img src="${p.img}"><div><b>${p.n}</b><small>${p.s}</small><div class="qty"><button data-i="${i}" data-d="-1">−</button>${l.q}<button data-i="${i}" data-d="1">+</button></div></div><span>${p.p*l.q}</span></div>`}).join(''):'<p class="empty">Your bag is empty.</p>';$('#cnt').textContent=n;$('#tot').textContent=t+' EGP'}
+const dr=o=>{$('#dr').classList.toggle('on',o);$('#ov').classList.toggle('on',o)};
+document.addEventListener('click',e=>{const a=e.target.closest('.qa');if(a){const id=+a.dataset.id,l=cart.find(x=>x.id===id);l?l.q++:cart.push({id,q:1});rc();dr(true)}const q=e.target.closest('.qty button');if(q){const l=cart[+q.dataset.i];l.q+=+q.dataset.d;if(l.q<=0)cart.splice(+q.dataset.i,1);rc()}});
+$('#bagBtn').onclick=()=>dr(true);$('#cl').onclick=$('#ov').onclick=()=>dr(false);
+// parallax + index
+const pns=[...document.querySelectorAll('.pn')],ids=['top','men','women','kids','trendy','shop'],ix=[...document.querySelectorAll('#idx a')];
+function sc(){pns.forEach(s=>{const r=s.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;s.querySelectorAll('[data-p]').forEach(m=>m.style.transform=`translateY(${-r.top*.08}px)`)});
+let cur=0;ids.forEach((id,i)=>{const el=document.getElementById(id);if(el.getBoundingClientRect().top<innerHeight*.5)cur=i});ix.forEach((a,i)=>a.classList.toggle('on',i===cur))}
+addEventListener('scroll',sc,{passive:true});sc();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+rp();rc();
+</script>
+</body>
+</html>
