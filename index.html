@@ -40,20 +40,17 @@
 .rail::-webkit-scrollbar{display:none}
 .rail .p{flex:0 0 clamp(230px,23vw,340px);scroll-snap-align:start}
 .rctl{display:flex;gap:8px}.rctl button{width:46px;height:46px;border:1px solid var(--line);border-radius:50%;transition:.3s}.rctl button:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-/* detail */
-.dt{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;padding:0 var(--pad);align-items:start}
-.dt figure{overflow:hidden;background:var(--soft)}
-.dt img{width:100%;height:100%;object-fit:cover;transition:transform 1.8s var(--ease)}
-.dt figure:hover img{transform:scale(1.04)}
-.dt figcaption{padding-top:12px;color:var(--mut);font-size:13px;line-height:1.5}
-.d1{grid-column:1/7}.d1 .fi{aspect-ratio:4/5;overflow:hidden;background:var(--soft)}
-.d2{grid-column:8/13}.d2 .fi{aspect-ratio:2.4/1;overflow:hidden;background:var(--soft)}
-.d3{grid-column:8/11;margin-top:26px}.d3 .fi{aspect-ratio:4/5;overflow:hidden;background:var(--soft)}
-.dspec{grid-column:11/13;margin-top:26px;align-self:end}
-.dspec dl{border-top:1px solid var(--ink)}
-.dspec div{padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.4}
-.dspec dt{color:var(--mut);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px;font-weight:400}
-@media(max-width:900px){.d1{grid-column:1/-1}.d2{grid-column:1/-1}.d3{grid-column:1/8}.dspec{grid-column:1/-1;margin-top:20px}}
+/* styling edit */
+.ed{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 var(--pad);align-items:start}
+.ed a{display:block}
+.ed .ph{aspect-ratio:3/4;background:var(--soft);overflow:hidden}
+.ed .ph img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;transition:transform 1.8s var(--ease)}
+.ed a:hover .ph img{transform:scale(1.05)}
+.ed a:nth-child(2){margin-top:9vh}
+.ed h3{font-weight:200;font-size:clamp(26px,2.6vw,40px);letter-spacing:-.04em;line-height:1;margin-top:18px}
+.ed p{color:var(--mut);font-size:13.5px;line-height:1.55;margin:8px 0 12px;max-width:30ch}
+.ed .up{display:inline-block}
+@media(max-width:760px){.ed{grid-template-columns:1fr 1fr}.ed a:nth-child(2){margin-top:0}.ed a:nth-child(3){grid-column:1/-1}.ed a:nth-child(3) .ph{aspect-ratio:4/3}}
 /* trendy */
 .tr{display:grid;grid-template-columns:1.1fr 1fr;background:var(--soft);margin-top:16vh;align-items:center}
 @media(max-width:860px){.tr{grid-template-columns:1fr}}
@@ -67,9 +64,11 @@
 .kd .ki{aspect-ratio:4/5;overflow:hidden;background:var(--soft)}.kd img{width:100%;height:100%;object-fit:cover;transition:transform 1.8s var(--ease)}.kd .ki:hover img{transform:scale(1.04)}
 .links{display:flex;gap:28px;flex-wrap:wrap}
 /* story */
-.stl{padding:18vh var(--pad) 0;display:grid;grid-template-columns:1fr 2fr;gap:6vw}
-@media(max-width:800px){.stl{grid-template-columns:1fr;gap:20px}}
-.stl p{font-weight:200;font-size:clamp(24px,2.7vw,44px);line-height:1.22;letter-spacing:-.03em;max-width:28em}
+.fab{margin-top:16vh;position:relative;height:min(70vh,640px);overflow:hidden;background:var(--soft)}
+.fab img{width:100%;height:100%;object-fit:cover}
+.fq{padding:9vh var(--pad) 0;text-align:center}
+.fq p{font-weight:200;font-size:clamp(28px,4vw,64px);line-height:1.08;letter-spacing:-.045em}
+.fq span{display:block;margin-top:20px;color:var(--mut)}
 .srv{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16vh var(--pad) 0}
 @media(max-width:800px){.srv{grid-template-columns:1fr}}
 .srv div{border-top:1px solid var(--ink);padding-top:16px;line-height:1.6;font-size:14.5px;color:#55544f}
@@ -96,16 +95,11 @@
 </section>
 
 <section class="sec">
-  <div class="sh"><h2>Up close</h2></div>
-  <div class="dt">
-    <figure class="d1 rv"><div class="fi"><img id="dA" alt="Half-cushioned terry detail"></div><figcaption>Half-cushioned terry. Heel to toe, with an arch-support band.</figcaption></figure>
-    <figure class="d2 rv"><div class="fi"><img id="dB" alt="Fabric colours"></div><figcaption>Finest cotton yarn — 80% cotton, 15% spandex, 5% elastane.</figcaption></figure>
-    <figure class="d3 rv"><div class="fi"><img id="dC" alt="Full-cushioned detail"></div><figcaption>Full cushioned. Maximum warmth.</figcaption></figure>
-    <div class="dspec rv"><dl>
-      <div><dt>Cushioning</dt>Light · Half · Full</div>
-      <div><dt>Cuts</dt>Invisible to long</div>
-      <div><dt>Grip</dt>Silicone on invisible styles</div>
-      <div><dt>Packs</dt>1, 3 or 5 pairs</div></dl></div>
+  <div class="sh"><h2>Dress the foot</h2><a class="up ul" href="collection.html?g=all">Shop all</a></div>
+  <div class="ed">
+    <a class="rv" id="e1" href="collection.html?g=all&cut=Invisible"><div class="ph"><img alt=""></div><h3>With loafers</h3><p>Invisible, light weight, with a silicone grip at the heel. Nothing shows but the shoe.</p><span class="up ul">Shop invisible</span></a>
+    <a class="rv" id="e2" href="collection.html?g=all&cut=Low-Cut"><div class="ph"><img alt=""></div><h3>With sneakers</h3><p>Low-cut, half cushioned. Terry underfoot, an arch-support band, a clean ankle line.</p><span class="up ul">Shop low-cut</span></a>
+    <a class="rv" id="e3" href="collection.html?g=all&cut=Long-Cut"><div class="ph"><img alt=""></div><h3>With boots</h3><p>Long-cut, full cushioned. Maximum warmth, finest cotton yarn, reinforced heel and toe.</p><span class="up ul">Shop long-cut</span></a>
   </div>
 </section>
 
@@ -119,7 +113,8 @@
   <div class="tx rv"><h2>For small<br>feet.</h2><p>Soft, anti-irritation materials for kids and babies, in packs of three and five pairs. Sized from 26 to 37, and newborn.</p><div class="links up"><a class="ul" href="collection.html?g=kids">Shop kids</a><a class="ul" href="collection.html?g=babies">Shop babies</a></div></div>
 </section>
 
-<section class="stl" id="story"><span class="up mut">Our story</span><p class="rv">Given the blessing of friendship, two ambitious entrepreneurs launched their first sock brand. For over a decade we've worked at full capacity to deliver the highest quality and unmatched comfort. Everything has its beginning — your comfort begins with your feet.</p></section>
+<section class="fab rv"><img id="imgFab" alt="Stitch socks in every colour"></section>
+<section class="fq"><p class="rv">Your comfort<br>begins with your feet.</p><span class="up">Made in Egypt · Over a decade of socks</span></section>
 
 <section class="srv">
   <div class="rv"><b>Free shipping</b>On every order over 800 EGP, across Egypt.</div>
@@ -134,7 +129,7 @@ document.documentElement.classList.remove('nojs');
 const {$,L,P,card,mount}=ST;
 mount({});
 $('#heroImg').src=L('hero',2000);$('#imgMen').src=L('men',1200);$('#imgWomen').src=L('women',1200);$('#imgKids').src=L('kids',1000);
-$('#dA').src=L('half',1200);$('#dB').src=L('fabric',1400);$('#dC').src=L('full',700);
+$('#imgFab').src=L('fabric',2000);
 $('#imgTr').src=ST.IMG('files/6copy_5c6da690-d3ad-4a7f-8b80-217a558f7a4d.jpg',1000);
 // newest, max two per style
 const cnt={};const pool=P.filter(p=>p.av&&p.g!=='babies').sort((a,b)=>b.ca-a.ca).filter(p=>{cnt[p.n+p.g]=(cnt[p.n+p.g]||0)+1;return cnt[p.n+p.g]<=1});
@@ -142,6 +137,8 @@ const gs=['men','women','trendy','kids'],by=Object.fromEntries(gs.map(g=>[g,pool
 const fresh=[];for(let i=0;fresh.length<12&&i<12;i++)gs.forEach(g=>{if(by[g][i]&&fresh.length<12)fresh.push(by[g][i])});
 $('#rail').innerHTML=fresh.map((p,i)=>card(p,i<5)).join('');
 $('#pv').onclick=()=>$('#rail').scrollBy({left:-420,behavior:'smooth'});$('#nx').onclick=()=>$('#rail').scrollBy({left:420,behavior:'smooth'});
+const pick=f=>P.find(p=>p.av&&f(p));
+[p=>p.cut==='Invisible'&&p.g==='women',p=>p.cut==='Low-Cut'&&p.cu==='Half Cushioned'&&p.g==='men',p=>p.cut==='Long-Cut'&&p.cu==='Full Cushioned'&&p.g==='men'].forEach((f,i)=>{const p=pick(f);if(p)$('#e'+(i+1)+' img').src=ST.IMG(p.im[0],900)});
 const hi=$('#heroImg');addEventListener('scroll',()=>{if(scrollY<innerHeight*1.2)hi.style.transform=`translateY(${scrollY*.16}px)`},{passive:true});
 </script>
 </body>
